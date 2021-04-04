@@ -9,15 +9,15 @@ Screens:
 - Profile
 
 Tech Stack:
-Kotlin
-Clean Architecture + MVVM
-ViewModel
-Navigation Component
-Hilt for DI
-Retrofit2, OkHttp
-Coroutines(Flow-StateFlow)
-Room
-Data
-ViewBinding
-MotionLayout
-Jetpack Compose???
+- Kotlin
+- Clean Architecture + MVVM
+- ViewModel
+- Navigation Component
+- Hilt for DI
+- Retrofit2, OkHttp
+- Coroutines(Flow-StateFlow)
+- Room
+- DataStore(instead of sharedpref)
+- ViewBinding
+- MotionLayout
+- Jetpack Compose???
