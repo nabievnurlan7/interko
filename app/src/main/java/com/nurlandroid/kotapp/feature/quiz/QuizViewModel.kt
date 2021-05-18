@@ -1,32 +1,20 @@
 package com.nurlandroid.kotapp.feature.quiz
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.nurlandroid.kotapp.common.base.BaseViewModel
+import com.nurlandroid.kotapp.common.error.ErrorType
+import com.nurlandroid.kotapp.common.network.ResponseStatus
+import kotlinx.coroutines.async
 
 
 class QuizViewModel(private val repository: QuizRepository) : BaseViewModel() {
 
-    sealed class InterviewState {
-        object Loading : InterviewState()
-        class NextQuestion(val question: Question, val number: String) : InterviewState()
-        class Error(val throwable: Throwable) : InterviewState()
+    sealed class UiState {
+        object Loading : UiState()
+        class Data(var questions: List<Question>) : UiState()
+        class Error(val errorType: ErrorType) : UiState()
     }
 
-    private var mutableState = SingleLiveEvent<InterviewState>()
-    val uiState: LiveData<InterviewState>
-        get() = mutableState
-
-    private var questions = listOf<Question>()
-    private var counter: Int = 0
-
-    fun loadQuestions(mode: Int, tagId: Int) {
-        doWorkInMainThread {
-            mutableState.postValue(InterviewState.Loading)
-            repository.getQuestions(mode, tagId).loadedData?.let {
-                questions = it
-                sendQuestion()
-            }
-        }
-    }
 
 }

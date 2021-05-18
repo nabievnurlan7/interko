@@ -4,14 +4,14 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 abstract class BaseViewModel : ViewModel() {
 
-    private val viewModelJob = Job()
+    private val viewModelJob = SupervisorJob()
     private val viewModelScope = CoroutineScope(Main + viewModelJob)
 
     fun <T> doWorkInIO(doAsyncBlock: suspend CoroutineScope.() -> T) {
@@ -28,9 +28,9 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     private inline fun <T> doCoroutineWork(
-        crossinline doAsyncBlock: suspend CoroutineScope.() -> T,
-        scope: CoroutineScope,
-        context: CoroutineContext
+            crossinline doAsyncBlock: suspend CoroutineScope.() -> T,
+            scope: CoroutineScope,
+            context: CoroutineContext
     ) {
         scope.launch {
             withContext(context) {
