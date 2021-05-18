@@ -9,7 +9,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainer"
-        android:name="com.nurlandroid.kotapp.feature.QuizFragment"
+        android:name="com.nurlandroid.kotapp.feature.quiz.QuizFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:tag="quiz_fragment"

@@ -24,6 +24,7 @@ class QuizFragment : BaseFragment(R.layout.fragment_quiz) {
             when (it) {
                 is UiState.Loading -> showProgress()
                 is UiState.Data -> {
+                    questionAdapter.setItems(it.questions)
                     closeProgress()
                 }
                 is UiState.Error -> {
@@ -46,5 +47,4 @@ class QuizFragment : BaseFragment(R.layout.fragment_quiz) {
             adapter = questionAdapter
         }
     }
-
 }

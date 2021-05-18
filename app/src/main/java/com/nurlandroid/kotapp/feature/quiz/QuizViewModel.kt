@@ -16,5 +16,26 @@ class QuizViewModel(private val repository: QuizRepository) : BaseViewModel() {
         class Error(val errorType: ErrorType) : UiState()
     }
 
+    private var mutableState = MutableLiveData<UiState>()
+    val uiState: LiveData<UiState>
+        get() = mutableState
 
+    init {
+        loadQuestions()
+    }
+
+    private fun loadQuestions() {
+        doWorkInMainThread {
+            val resultDeferred = async { repository.getQuestions(20, 0) }
+            val result = resultDeferred.await()
+
+            when (result.status) {
+                ResponseStatus.SUCCESS -> {
+                    val questions = result.fetchedData!!
+                    mutableState.postValue(UiState.Data(questions))
+                }
+                ResponseStatus.ERROR -> mutableState.postValue(UiState.Error(result.errorType!!))
+            }
+        }
+    }
 }
