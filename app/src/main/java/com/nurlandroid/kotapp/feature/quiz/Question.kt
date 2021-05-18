@@ -1,4 +1,4 @@
-package com.nurlandroid.kotapp.feature
+package com.nurlandroid.kotapp.feature.quiz
 
 data class Question(
     val id: String,

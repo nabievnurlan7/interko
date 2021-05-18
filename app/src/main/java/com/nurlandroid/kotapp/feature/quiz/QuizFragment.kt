@@ -1,4 +1,4 @@
-package com.nurlandroid.kotapp.feature
+package com.nurlandroid.kotapp.feature.quiz
 
 import android.os.Bundle
 import android.view.View
