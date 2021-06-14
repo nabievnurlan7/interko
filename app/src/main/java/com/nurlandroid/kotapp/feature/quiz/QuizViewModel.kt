@@ -1,11 +1,13 @@
 package com.nurlandroid.kotapp.feature.quiz
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.nurlandroid.kotapp.common.base.BaseViewModel
 import com.nurlandroid.kotapp.common.error.ErrorType
 import com.nurlandroid.kotapp.common.network.ResponseStatus
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
 
 class QuizViewModel(private val repository: QuizRepository) : BaseViewModel() {
@@ -16,26 +18,43 @@ class QuizViewModel(private val repository: QuizRepository) : BaseViewModel() {
         class Error(val errorType: ErrorType) : UiState()
     }
 
-    private var mutableState = MutableLiveData<UiState>()
-    val uiState: LiveData<UiState>
-        get() = mutableState
+//    private var mutableState = MutableLiveData<UiState>()
+//    val liveData: LiveData<UiState>
+//        get() = mutableState
+
+    private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
+    val uiState = _uiState.asStateFlow()
 
     init {
         loadQuestions()
     }
 
     private fun loadQuestions() {
-        doWorkInMainThread {
-            val resultDeferred = async { repository.getQuestions(20, 0) }
-            val result = resultDeferred.await()
+        val tagId = 0
+        doWorkInMainThread(
+                doAsyncBlock = {
+                    val resultDeferred = async {
+                        repository.getQuestions(20, tagId)
+                    }
 
-            when (result.status) {
-                ResponseStatus.SUCCESS -> {
-                    val questions = result.fetchedData!!
-                    mutableState.postValue(UiState.Data(questions))
+                    // For HomeTask#2
+                    if (tagId == 1) {
+                        throw IllegalArgumentException("!!!")
+                    }
+
+                    val result = resultDeferred.await()
+
+                    when (result.status) {
+                        ResponseStatus.SUCCESS -> {
+                            val questions = result.fetchedData!!
+                            _uiState.emit(UiState.Data(questions))
+                        }
+                        ResponseStatus.ERROR -> _uiState.emit(UiState.Error(result.errorType!!))
+                    }
+                },
+                exceptionBlock = {
+                    viewModelScope.launch { _uiState.emit(UiState.Error(it)) }
                 }
-                ResponseStatus.ERROR -> mutableState.postValue(UiState.Error(result.errorType!!))
-            }
-        }
+        )
     }
 }

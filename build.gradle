@@ -27,7 +27,7 @@ buildscript {
 
         junit = '4.13'
 
-        kotlin = '1.4.21'
+        kotlin = '1.4.30'
         koinVersion = '2.2.0-alpha-1'
         koinTest = '2.0.1'
 

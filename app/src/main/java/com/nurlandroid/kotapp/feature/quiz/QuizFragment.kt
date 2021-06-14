@@ -2,14 +2,18 @@ package com.nurlandroid.kotapp.feature.quiz
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nurlandroid.kotapp.R
 import com.nurlandroid.kotapp.common.base.BaseFragment
 import com.nurlandroid.kotapp.feature.quiz.QuizViewModel.UiState
 import kotlinx.android.synthetic.main.fragment_quiz.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class QuizFragment : BaseFragment(R.layout.fragment_quiz) {
     private val viewModel: QuizViewModel by viewModel()
@@ -20,19 +24,21 @@ class QuizFragment : BaseFragment(R.layout.fragment_quiz) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.uiState.observe(viewLifecycleOwner, {
-            when (it) {
-                is UiState.Loading -> showProgress()
-                is UiState.Data -> {
-                    questionAdapter.setItems(it.questions)
-                    closeProgress()
-                }
-                is UiState.Error -> {
-                    closeProgress()
-                    Timber.e("${it.errorType}")
+        CoroutineScope(Dispatchers.Main).launch {
+            viewModel.uiState.collect {
+                when (it) {
+                    is UiState.Loading -> showProgress()
+                    is UiState.Data -> {
+                        questionAdapter.setItems(it.questions)
+                        closeProgress()
+                    }
+                    is UiState.Error -> {
+                        closeProgress()
+                        Toast.makeText(requireContext(), it.errorType.message, Toast.LENGTH_LONG).show()
+                    }
                 }
             }
-        })
+        }
 
         setRecycler()
     }

@@ -1,12 +1,11 @@
 package com.nurlandroid.kotapp.common.base
 
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.CoroutineScope
+import com.nurlandroid.kotapp.common.error.ErrorHandler
+import com.nurlandroid.kotapp.common.error.ErrorType
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 abstract class BaseViewModel : ViewModel() {
@@ -14,12 +13,18 @@ abstract class BaseViewModel : ViewModel() {
     private val viewModelJob = SupervisorJob()
     private val viewModelScope = CoroutineScope(Main + viewModelJob)
 
-    fun <T> doWorkInIO(doAsyncBlock: suspend CoroutineScope.() -> T) {
-        doCoroutineWork(doAsyncBlock, viewModelScope, IO)
+    fun <T> doWorkInIO(
+            doAsyncBlock: suspend CoroutineScope.() -> T,
+            exceptionBlock: (ErrorType) -> Unit
+    ) {
+        doCoroutineWork(doAsyncBlock, viewModelScope, IO, exceptionBlock)
     }
 
-    fun <T> doWorkInMainThread(doAsyncBlock: suspend CoroutineScope.() -> T) {
-        doCoroutineWork(doAsyncBlock, viewModelScope, Main)
+    fun <T> doWorkInMainThread(
+            doAsyncBlock: suspend CoroutineScope.() -> T,
+            exceptionBlock: (ErrorType) -> Unit
+    ) {
+        doCoroutineWork(doAsyncBlock, viewModelScope, Main, exceptionBlock)
     }
 
     override fun onCleared() {
@@ -30,9 +35,13 @@ abstract class BaseViewModel : ViewModel() {
     private inline fun <T> doCoroutineWork(
             crossinline doAsyncBlock: suspend CoroutineScope.() -> T,
             scope: CoroutineScope,
-            context: CoroutineContext
+            context: CoroutineContext,
+            crossinline exceptionBlock: (ErrorType) -> Unit
     ) {
-        scope.launch {
+        scope.launch(
+                CoroutineExceptionHandler { _, throwable -> exceptionBlock.invoke(ErrorHandler.handleException(throwable)) }
+        )
+        {
             withContext(context) {
                 doAsyncBlock.invoke(this)
             }

@@ -9,7 +9,7 @@ object ResponseHandler {
     fun <T> handleResponse(response: Response<T>): NetworkResult<T> {
         require(response.code() == 200) {
             val errorCode = response.code()
-            return NetworkResult.error(errorType = ErrorHandler.handleErrorByCode(errorCode))
+            return NetworkResult.error(errorType = ErrorHandler.handleServerErrorByCode(errorCode))
         }
 
         val body = response.body()
