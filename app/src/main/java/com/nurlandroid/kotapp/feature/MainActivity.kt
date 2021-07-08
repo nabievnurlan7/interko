@@ -4,14 +4,21 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.nurlandroid.kotapp.R
 import com.nurlandroid.kotapp.common.extension.setupWithNavController
 import com.nurlandroid.kotapp.databinding.ActivityMainBinding
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity(R.layout.activity_main), HasSupportFragmentInjector {
+
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
     private val viewBinding: ActivityMainBinding by viewBinding(R.id.container)
 
@@ -23,6 +30,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
 
     }
+
+    override fun supportFragmentInjector() = dispatchingAndroidInjector
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)

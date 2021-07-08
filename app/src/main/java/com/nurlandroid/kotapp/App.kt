@@ -1,19 +1,26 @@
 package com.nurlandroid.kotapp
 
+import android.app.Activity
 import android.app.Application
-import com.nurlandroid.kotapp.di.diModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
+import com.nurlandroid.kotapp.di.dagger.AppInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
+import javax.inject.Inject
 
-class KotApplication : Application() {
+class KotApplication : Application(), HasActivityInjector {
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
         super.onCreate()
-        startKoin {
-            androidContext(this@KotApplication)
-            androidLogger()
-            modules(diModule)
-        }
+
+        AppInjector.init(this)
+//        startKoin {
+//            androidContext(this@KotApplication)
+//            androidLogger()
+//            modules(diModule)
+//        }
     }
+
+    override fun activityInjector() = dispatchingAndroidInjector
 }

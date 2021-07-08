@@ -8,9 +8,12 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class QuizViewModel(private val repository: QuizRepository) : BaseViewModel() {
+class QuizViewModel @Inject constructor() : BaseViewModel() {
+    @Inject
+    lateinit var repository: QuizRepository
 
     sealed class UiState {
         object Loading : UiState()

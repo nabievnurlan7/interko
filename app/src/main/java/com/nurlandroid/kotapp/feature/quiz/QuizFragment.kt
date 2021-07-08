@@ -3,20 +3,28 @@ package com.nurlandroid.kotapp.feature.quiz
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nurlandroid.kotapp.R
 import com.nurlandroid.kotapp.common.base.BaseFragment
+import com.nurlandroid.kotapp.di.dagger.Injectable
 import com.nurlandroid.kotapp.feature.quiz.QuizViewModel.UiState
 import kotlinx.android.synthetic.main.fragment_quiz.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import javax.inject.Inject
 
-class QuizFragment : BaseFragment(R.layout.fragment_quiz) {
-    private val viewModel: QuizViewModel by viewModel()
+class QuizFragment : BaseFragment(R.layout.fragment_quiz), Injectable {
+    //private val viewModel: QuizViewModel by viewModel()
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel: QuizViewModel by viewModels { viewModelFactory }
 
     private lateinit var questionAdapter: QuestionAdapter
 
@@ -44,7 +52,7 @@ class QuizFragment : BaseFragment(R.layout.fragment_quiz) {
     }
 
     private fun setRecycler() {
-        questionAdapter = QuestionAdapter() { _, _, item ->
+        questionAdapter = QuestionAdapter { _, _, item ->
         }
 
         val linearLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)

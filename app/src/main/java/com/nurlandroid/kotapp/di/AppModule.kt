@@ -12,9 +12,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 val diModule = module {
     single { CustomFragmentFactory() }
-
-    single { QuizRepository(get()) }
-    viewModel { QuizViewModel(get()) }
+//
+//    single { QuizRepository(get()) }
+//    viewModel { QuizViewModel(get()) }
 
     single<NetworkApi> {
         Retrofit.Builder()
