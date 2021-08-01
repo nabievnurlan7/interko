@@ -1,1 +1,8 @@
+include ':modules:core_factory'
+include ':modules:feature_profile'
+include ':modules:feature_job'
+include ':modules:core'
+include ':modules'
 include ':app'
+include ':modules:feature_quiz'
+include ':modules:network'

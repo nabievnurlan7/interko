@@ -7,6 +7,6 @@
 
     <fragment
         android:id="@+id/quizFragment"
-        android:name="com.nurlandroid.kotapp.feature.quiz.QuizFragment"
+        android:name="com.viled.feature_quiz.QuizFragment"
         android:label="QuizFragment" />
 </navigation>

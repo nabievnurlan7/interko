@@ -1,26 +1,22 @@
 package com.nurlandroid.kotapp
 
-import android.app.Activity
 import android.app.Application
-import com.nurlandroid.kotapp.di.dagger.AppInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import javax.inject.Inject
+import com.viled.core.AppWithFacade
+import com.viled.core.ProvidersFacade
 
-class KotApplication : Application(), HasActivityInjector {
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+class KotApplication : Application(), AppWithFacade {
 
     override fun onCreate() {
         super.onCreate()
 
-        AppInjector.init(this)
-//        startKoin {
-//            androidContext(this@KotApplication)
-//            androidLogger()
-//            modules(diModule)
-//        }
+        (getFacade() as FacadeComponent).inject(this)
     }
 
-    override fun activityInjector() = dispatchingAndroidInjector
+    override fun getFacade(): ProvidersFacade = facadeComponent ?: FacadeComponent.init(this).also {
+        facadeComponent = it
+    }
+
+    companion object {
+        private var facadeComponent: FacadeComponent? = null
+    }
 }

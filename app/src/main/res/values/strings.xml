@@ -11,4 +11,5 @@
     <string name="nothing">Nothing</string>
     <string name="url">Url</string>
     <string name="file">File</string>
+    <string name="title_dynamicfeature">myFeature</string>
 </resources>
