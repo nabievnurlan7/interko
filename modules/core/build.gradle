@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -31,17 +32,35 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
+
+    implementation project(':modules:navigation')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin"
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.4.0'
 
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigationComponent"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigationComponent"
+    implementation "androidx.appcompat:appcompat:$appcompat"
+    implementation "androidx.core:core-ktx:$androidxCoreKtx"
+
+    // Android supports
+    implementation "com.google.android.material:material:$material"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+
+    // Architecture components
+    implementation "androidx.fragment:fragment-ktx:$fragmentKtx"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
+    testImplementation "androidx.arch.core:core-testing:$lifecycleTesting"
 
     // Network
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -60,6 +79,8 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    implementation "com.kirich1409.viewbindingpropertydelegate:viewbindingpropertydelegate:$viewBindingDelegateVersion"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/core_nav">
+
+    <include app:graph="@navigation/core_nav" />
+    <include app:graph="@navigation/quiz_nav" />
+
+    <action
+        android:id="@+id/action_global_quiz"
+        app:destination="@id/quiz_nav"
+        app:popUpTo="@id/main_nav" />
+</navigation>

@@ -15,7 +15,6 @@ abstract class QuizModule {
     @Singleton
     abstract fun bindsRepository(repository: QuizRepository): QuizRepository
 
-    @Module
     companion object {
 
         @Provides

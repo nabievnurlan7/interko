@@ -16,14 +16,13 @@
         android:networkSecurityConfig="@xml/network"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity android:name=".feature.MainActivity">
+        <activity android:name="com.viled.core.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <nav-graph android:value="@navigation/main_nav" />
         </activity>
-        <activity android:name=".feature.profiling.TestActivity" />
     </application>
 
 </manifest>

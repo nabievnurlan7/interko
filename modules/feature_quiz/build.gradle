@@ -42,6 +42,7 @@ dependencies {
     api project(':modules:core_factory')
     implementation project(':modules:core')
     implementation project(':modules:network')
+    implementation project(':modules:navigation')
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin"
@@ -58,6 +59,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationComponent"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationComponent"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+
     testImplementation "androidx.arch.core:core-testing:$lifecycleTesting"
 
     // Coroutines
