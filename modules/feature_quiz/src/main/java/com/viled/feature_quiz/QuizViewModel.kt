@@ -7,7 +7,7 @@ import com.viled.core.dto.Question
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -37,13 +37,7 @@ class QuizViewModel
                     repository.getQuestions(20, tagId)
                 }
 
-                // For HomeTask#2
-                if (tagId == 1) {
-                    throw IllegalArgumentException("!!!")
-                }
-
                 val result = resultDeferred.await()
-
                 when (result.status) {
                     ResponseStatus.SUCCESS -> {
                         val questions = result.fetchedData!!
@@ -52,9 +46,7 @@ class QuizViewModel
                     ResponseStatus.ERROR -> _uiState.emit(UiState.Error(result.errorType!!))
                 }
             },
-            exceptionBlock = {
-                viewModelScope.launch { _uiState.emit(UiState.Error(it)) }
-            }
+            exceptionBlock = { Timber.e("$it") }
         )
     }
 }

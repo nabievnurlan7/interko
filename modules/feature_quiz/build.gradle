@@ -83,6 +83,7 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
 
     implementation "com.kirich1409.viewbindingpropertydelegate:viewbindingpropertydelegate:$viewBindingDelegateVersion"
+    implementation "com.jakewharton.timber:timber:$timber"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

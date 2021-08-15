@@ -11,7 +11,7 @@ import kotlin.coroutines.CoroutineContext
 abstract class BaseViewModel : ViewModel() {
 
     private val viewModelJob = SupervisorJob()
-    protected val viewModelScope = CoroutineScope(Main + viewModelJob)
+    private val viewModelScope = CoroutineScope(Main + viewModelJob)
 
     fun <T> doWorkInIO(
         doAsyncBlock: suspend CoroutineScope.() -> T,
@@ -40,11 +40,7 @@ abstract class BaseViewModel : ViewModel() {
     ) {
         scope.launch(
             CoroutineExceptionHandler { _, throwable ->
-                exceptionBlock.invoke(
-                    ErrorHandler.handleException(
-                        throwable
-                    )
-                )
+                exceptionBlock.invoke(ErrorHandler.handleException(throwable))
             }
         )
         {
