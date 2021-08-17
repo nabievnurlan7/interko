@@ -12,7 +12,7 @@ import javax.inject.Singleton
     modules = [QuizModule::class],
     dependencies = [ProvidersFacade::class, ViewModelsProvider::class]
 )
-interface QuizComponent : ViewModelsProvider{
+interface QuizComponent : ViewModelsProvider {
 
     companion object {
 

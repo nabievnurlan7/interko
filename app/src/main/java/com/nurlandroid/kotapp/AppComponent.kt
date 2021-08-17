@@ -8,11 +8,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(
-    modules = [
-        AppModule::class
-    ]
-)
+@Component
 interface AppComponent : AppProvider {
 
     companion object {

@@ -4,12 +4,12 @@ import com.viled.core.common.base.BaseViewModel
 import com.viled.core.common.error.ErrorType
 import com.viled.core.common.network.ResponseStatus
 import com.viled.core.dto.Question
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import timber.log.Timber
 import javax.inject.Inject
-
 
 class QuizViewModel
 @Inject constructor(
@@ -33,7 +33,7 @@ class QuizViewModel
         val tagId = 0
         doWorkInMainThread(
             doAsyncBlock = {
-                val resultDeferred = async {
+                val resultDeferred = async(Dispatchers.IO) {
                     repository.getQuestions(20, tagId)
                 }
 
