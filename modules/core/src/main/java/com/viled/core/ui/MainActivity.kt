@@ -9,7 +9,9 @@ import com.viled.core.R
 import com.viled.navigation.NavigationFlow
 import com.viled.navigation.Navigator
 import com.viled.navigation.ToFlowNavigatable
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), ToFlowNavigatable {
 
     private val navigator: Navigator = Navigator()

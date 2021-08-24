@@ -1,9 +1,14 @@
 package com.viled.feature_quiz
 
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.ViewModel
 import com.viled.core.common.base.BaseViewModel
 import com.viled.core.common.error.ErrorType
 import com.viled.core.common.network.ResponseStatus
 import com.viled.core.dto.Question
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,8 +16,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import timber.log.Timber
 import javax.inject.Inject
 
-class QuizViewModel
-@Inject constructor(
+@HiltViewModel
+class QuizViewModel @Inject constructor
+(
     private val repository: QuizRepository
 ) : BaseViewModel() {
 

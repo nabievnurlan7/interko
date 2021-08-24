@@ -3,6 +3,7 @@ package com.viled.core.common.base
 import androidx.lifecycle.ViewModel
 import com.viled.core.common.error.ErrorHandler
 import com.viled.core.common.error.ErrorType
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main

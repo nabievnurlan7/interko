@@ -9,7 +9,7 @@ object CoreProvidersFactory {
 //            DaggerDatabaseComponent.builder().appProvider(appProvider).build()
 
 
-    fun createViewModelBuilder(): ViewModelsProvider {
-        return DaggerViewModelComponent.create()
-    }
+//    fun createViewModelBuilder(): ViewModelsProvider {
+//        return DaggerViewModelComponent.create()
+//    }
 }

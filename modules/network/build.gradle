@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -35,7 +36,10 @@ android {
 
 dependencies {
     implementation project(':modules:core')
-    implementation project(':modules:core_factory')
+
+    //Hilt
+    implementation 'com.google.dagger:hilt-android:2.35.1'
+    kapt 'com.google.dagger:hilt-android-compiler:2.35.1'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin"
     implementation 'androidx.core:core-ktx:1.6.0'
@@ -47,12 +51,6 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3LogInterceptor"
     testImplementation "com.squareup.okhttp3:mockwebserver:$mockWebServerVersion"
-
-    // Dagger2
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
