@@ -3,6 +3,16 @@
 
     <item
         android:id="@id/quiz_nav"
-        android:icon="@drawable/ic_apps"
+        android:icon="@drawable/ic_chat"
         android:title="@string/menu1" />
+
+    <item
+        android:id="@id/job_nav"
+        android:icon="@drawable/ic_apps"
+        android:title="@string/menu2" />
+
+    <item
+        android:id="@id/profile_nav"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/menu3" />
 </menu>

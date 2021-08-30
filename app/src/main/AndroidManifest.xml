@@ -24,5 +24,4 @@
             <nav-graph android:value="@navigation/main_nav" />
         </activity>
     </application>
-
 </manifest>

@@ -17,6 +17,7 @@ buildscript {
         appcompat = '1.3.0-rc01'
         autoImageSlider = '1.3.2-appcompat'
 
+        circularimageview='1.4'
         constraintlayout = '2.0.4'
         coroutines = '1.4.2'
 

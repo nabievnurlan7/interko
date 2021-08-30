@@ -6,9 +6,21 @@
 
     <include app:graph="@navigation/core_nav" />
     <include app:graph="@navigation/quiz_nav" />
+    <include app:graph="@navigation/job_nav" />
+    <include app:graph="@navigation/profile_nav" />
 
     <action
         android:id="@+id/action_global_quiz"
         app:destination="@id/quiz_nav"
+        app:popUpTo="@id/main_nav" />
+
+    <action
+        android:id="@+id/action_global_job"
+        app:destination="@id/job_nav"
+        app:popUpTo="@id/main_nav" />
+
+    <action
+        android:id="@+id/action_global_profile"
+        app:destination="@id/profile_nav"
         app:popUpTo="@id/main_nav" />
 </navigation>
