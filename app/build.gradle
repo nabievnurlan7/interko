@@ -40,6 +40,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':modules:core')
     implementation project(':modules:feature_job')
+    implementation project(':modules:feature_main')
     implementation project(':modules:feature_profile')
     implementation project(':modules:feature_quiz')
     implementation project(':modules:network')

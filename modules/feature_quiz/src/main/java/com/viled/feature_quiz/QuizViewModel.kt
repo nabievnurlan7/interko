@@ -1,13 +1,9 @@
 package com.viled.feature_quiz
 
-import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.ViewModel
 import com.viled.core.common.base.BaseViewModel
 import com.viled.core.common.error.ErrorType
-import com.viled.core.common.network.ResponseStatus
+import com.viled.network.ResponseStatus
 import com.viled.core.dto.Question
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

@@ -16,7 +16,7 @@
         android:networkSecurityConfig="@xml/network"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity android:name="com.viled.core.ui.MainActivity">
+        <activity android:name="com.viled.feature_main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

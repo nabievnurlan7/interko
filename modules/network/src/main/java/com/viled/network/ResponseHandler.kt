@@ -1,4 +1,4 @@
-package com.viled.core.common.network
+package com.viled.network
 
 import com.viled.core.common.error.ErrorHandler
 import com.viled.core.common.error.ErrorType

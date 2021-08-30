@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.viled.core.ui.MainFragment"
+        android:name="com.viled.feature_main.MainFragment"
         android:label="MainFragment" />
 </navigation>

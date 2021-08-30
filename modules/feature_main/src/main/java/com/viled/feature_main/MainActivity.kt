@@ -1,11 +1,10 @@
-package com.viled.core.ui
+package com.viled.feature_main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.viled.core.R
 import com.viled.navigation.NavigationFlow
 import com.viled.navigation.Navigator
 import com.viled.navigation.ToFlowNavigatable
@@ -25,6 +24,7 @@ class MainActivity : AppCompatActivity(), ToFlowNavigatable {
 
         navigator.navController = navController
         navView.setupWithNavController(navController)
+        navigateToFlow(NavigationFlow.SomeFlow)
     }
 
     override fun navigateToFlow(flow: NavigationFlow) {

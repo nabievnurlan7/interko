@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@id/quiz_nav"
-    app:startDestination="@id/quizFragment">
+    app:startDestination="@id/someFragment">
 
     <fragment
         android:id="@+id/quizFragment"
@@ -12,6 +12,10 @@
     <fragment
         android:id="@+id/someFragment"
         android:name="com.viled.feature_quiz.SomeFragment"
-        android:label="SomeFragment" />
+        android:label="SomeFragment" >
 
+        <action
+            android:id="@+id/action_someFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
+    </fragment>
 </navigation>

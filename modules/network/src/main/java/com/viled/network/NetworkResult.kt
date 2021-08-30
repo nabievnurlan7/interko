@@ -1,11 +1,11 @@
-package com.viled.core.common.network
+package com.viled.network
 
 import com.viled.core.common.error.ErrorType
 
 class NetworkResult<out T>(
-        val status: ResponseStatus,
-        val fetchedData: T?,
-        val errorType: ErrorType?
+    val status: ResponseStatus,
+    val fetchedData: T?,
+    val errorType: ErrorType?
 ) {
     companion object {
         fun <T> success(fetchedData: T?): NetworkResult<T> =

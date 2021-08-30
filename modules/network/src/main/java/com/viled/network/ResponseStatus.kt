@@ -1,4 +1,4 @@
-package com.viled.core.common.network
+package com.viled.network
 
 enum class ResponseStatus {
     SUCCESS,

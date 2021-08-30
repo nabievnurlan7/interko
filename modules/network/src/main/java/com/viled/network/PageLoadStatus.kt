@@ -1,4 +1,4 @@
-package com.viled.core.common.network
+package com.viled.network
 
 class PageLoadStatus(
     var isOnLoading: Boolean = false,
