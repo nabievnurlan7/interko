@@ -4,10 +4,9 @@ import com.viled.core.common.SERVER
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityRetainedComponent
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import dagger.hilt.android.components.ActivityRetainedComponent
-import javax.inject.Singleton
 
 @InstallIn(ActivityRetainedComponent::class)
 @Module

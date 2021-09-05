@@ -17,7 +17,7 @@ data class Job(
 
 @Parcelize
 data class Company(
-    val name: String = "Tinkoff",
+    val name: String,
     val established: String = "2001",
     val employees: String = "120",
     val headquarterLocation: String = "Moscow, Russia",

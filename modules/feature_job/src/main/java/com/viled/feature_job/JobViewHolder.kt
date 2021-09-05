@@ -19,6 +19,12 @@ class JobViewHolder(
             descriptionTextView.text = item.positionName
             salaryTextView.text = item.salary
             locationTextView.text = item.location
+
+            if (item.company.name == "Tinkoff") {
+                logoImageView.setImageResource(R.drawable.tinkoff_logo)
+            } else {
+                logoImageView.setImageResource(R.drawable.chase_logo)
+            }
         }
     }
 }

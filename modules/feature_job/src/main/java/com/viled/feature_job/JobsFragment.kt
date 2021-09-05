@@ -38,8 +38,8 @@ class JobsFragment : BaseFragment(R.layout.fragment_jobs) {
         )
 
         val linearLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        linearLayoutManager.initialPrefetchItemCount = 20
         with(viewBinding) {
+
             jobsRecyclerView.apply {
                 layoutManager = linearLayoutManager
                 adapter = jobsAdapter
@@ -58,7 +58,7 @@ class JobsFragment : BaseFragment(R.layout.fragment_jobs) {
             })
         }
 
-        viewModel.getJobs().observe(viewLifecycleOwner, Observer { partnerList ->
+        viewModel.getJobs().observe(viewLifecycleOwner, { partnerList ->
             jobsAdapter.setItems(partnerList)
         })
     }
