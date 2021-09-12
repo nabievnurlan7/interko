@@ -83,6 +83,8 @@ dependencies {
 
     implementation "com.kirich1409.viewbindingpropertydelegate:viewbindingpropertydelegate:$viewBindingDelegateVersion"
     implementation "com.jakewharton.timber:timber:$timber"
+    implementation "androidx.biometric:biometric:1.0.1"
+
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin"
     implementation 'androidx.core:core-ktx:1.6.0'

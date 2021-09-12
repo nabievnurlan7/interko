@@ -7,8 +7,6 @@ import androidx.annotation.RequiresApi
 import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
-import javax.crypto.spec.GCMParameterSpec
-import javax.crypto.spec.IvParameterSpec
 
 @RequiresApi(Build.VERSION_CODES.M)
 class CryptoUtilsReified : CryptoUtils() {

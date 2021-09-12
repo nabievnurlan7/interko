@@ -21,12 +21,13 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     private lateinit var sharedPrefLayer: SharedPrefLayer
 
     sealed class UiState {
+        object Idle : UiState()
         object Loading : UiState()
-        class Data(var token: String) : UiState()
+        class Data(var successStatus: String) : UiState()
         class Error(val errorType: ErrorType) : UiState()
     }
 
-    private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
+    private val _uiState = MutableStateFlow<UiState>(UiState.Idle)
     val uiState = _uiState.asStateFlow()
 
     fun setCryptoUtils(cryptoUtils: CryptoUtils) {
@@ -35,9 +36,13 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
 
     fun setShared(sharedPrefLayer: SharedPrefLayer) {
         this.sharedPrefLayer = sharedPrefLayer
+
+        if (sharedPrefLayer.token.isNotEmpty() && sharedPrefLayer.isBiometry) {
+            _uiState.value = UiState.Data("show_bio")
+        }
     }
 
-    fun login(phone: String, password: String) {
+    fun login(phone: String, password: String, checked: Boolean) {
 
         doWorkInMainThread(
             doAsyncBlock = {
@@ -50,24 +55,25 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
                     ResponseStatus.SUCCESS -> {
                         val token = result.fetchedData!!
                         encrypt(token)
+                        sharedPrefLayer.isBiometry = checked
                     }
                     ResponseStatus.ERROR -> _uiState.emit(UiState.Error(result.errorType!!))
                 }
             },
             exceptionBlock = {
                 Log.e("ERROR=", it.toString())
-                Timber.e("$it") }
+                Timber.e("$it")
+            }
         )
     }
 
     private fun encrypt(token: String) {
         val encryptedValue = cryptoUtils.encrypt(token)
         sharedPrefLayer.token = encryptedValue
-        Log.d("ENCRYPTED_TOKEN=", encryptedValue)
+        _uiState.value = UiState.Data("go")
+    }
 
-        val decryptedValue = cryptoUtils.decrypt(sharedPrefLayer.token)
-        Log.d("DECRYPTED_TOKEN=", decryptedValue)
-
-        _uiState.value = UiState.Data(token)
+    fun setSuccess() {
+        _uiState.value = UiState.Data("go")
     }
 }
