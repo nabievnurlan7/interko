@@ -13,10 +13,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class QuizViewModel @Inject constructor
-(
-    private val repository: QuizRepository
-) : BaseViewModel() {
+class QuizViewModel @Inject constructor(private val repository: QuizRepository) : BaseViewModel() {
 
     sealed class UiState {
         object Loading : UiState()

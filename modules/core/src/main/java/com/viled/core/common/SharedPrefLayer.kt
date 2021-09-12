@@ -18,6 +18,22 @@ class SharedPrefLayer(context: Context) {
             editor.apply()
         }
 
+    var token
+        get() = sharedPref.getString(TOKEN, "") ?: ""
+        set(value) {
+            val editor = sharedPref.edit()
+            editor.putString(TOKEN, value)
+            editor.apply()
+        }
+
+    var isBiometry
+        get() = sharedPref.getBoolean(BIOMETRY, false)
+        set(value) {
+            val editor = sharedPref.edit()
+            editor.putBoolean(BIOMETRY, value)
+            editor.apply()
+        }
+
     fun saveMyObject(item: Any) {
         val parameter = item::class.java.toString()
         val objectAsString = gson.toJson(item)
@@ -36,5 +52,7 @@ class SharedPrefLayer(context: Context) {
     companion object {
         private const val SHARED_NAME = "shared_pref_file"
         private const val KEY_NAME = "key_name"
+        private const val TOKEN = "token"
+        private const val BIOMETRY = "biometry"
     }
 }

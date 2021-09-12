@@ -1,5 +1,6 @@
 package com.viled.core.common.base
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.viled.core.common.error.ErrorHandler
 import com.viled.core.common.error.ErrorType
@@ -41,6 +42,7 @@ abstract class BaseViewModel : ViewModel() {
     ) {
         scope.launch(
             CoroutineExceptionHandler { _, throwable ->
+                Log.e("ERROR=", throwable.toString())
                 exceptionBlock.invoke(ErrorHandler.handleException(throwable))
             }
         )

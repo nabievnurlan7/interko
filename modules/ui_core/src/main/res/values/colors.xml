@@ -5,6 +5,22 @@
     <color name="colorAccent">#3DDB86</color>
     <color name="colorWhite">#FFFFFF</color>
 
+    <color name="background_primary">#FFFFFF</color>
+    <color name="background_secondary">#F5F5F5</color>
+    <color name="background_tertiary">#F9F9F9</color>
+
+    <color name="line_primary">#F0F0F0</color>
+    <color name="line_secondary">#E3E3E3</color>
+    <color name="red">#C21C30</color>
+
+    <color name="icon_active">#000000</color>
+    <color name="icon_inactive">#D0D0D0</color>
+    <color name="textPrimary">#000000</color>
+    <color name="textTertiary">#B1B1B1</color>
+    <color name="textWhite">#FFFFFF</color>
+    <color name="whiteBlurred">#80FFFFFF</color>
+    <color name="altoColor">#E0E0E0</color>
+
     <color name="colorLightGray">#ECEDEF</color>
     <color name="yellow">#FCE205</color>
     <color name="darkGray">#495F6A</color>

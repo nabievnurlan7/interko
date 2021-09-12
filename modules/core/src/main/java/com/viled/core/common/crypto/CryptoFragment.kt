@@ -13,7 +13,7 @@ class CryptoFragment : BaseFragment(R.layout.fragment_crypto) {
         super.onAttach(context)
         cryptoUtils =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) CryptoUtilsReified()
-            else CryptoUtilsDownMReified(requireContext())
+            else CryptoUtilsLowerMReified(requireContext())
     }
 
     override fun setUI() {

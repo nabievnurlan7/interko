@@ -15,9 +15,9 @@ abstract class CryptoUtils {
 
     protected val keyStore: KeyStore = KeyStore.getInstance(providerType).apply { load(null) }
 
-    abstract fun encrypt(keyAlias: String, text: String): ByteArray
+    abstract fun encrypt(text: String): String
 
-    abstract fun decrypt(keyAlias: String, encryptedData: ByteArray): String
+    abstract fun decrypt(encryptedData: String): String
 
     abstract fun getKey(alias: String): SecretKey
 
@@ -26,5 +26,6 @@ abstract class CryptoUtils {
     companion object {
         const val RSA_ALGORITHM = "RSA"
         const val AES_ALGORITHM = "AES"
+        const val KEY_ALIAS = "my_key_storage"
     }
 }

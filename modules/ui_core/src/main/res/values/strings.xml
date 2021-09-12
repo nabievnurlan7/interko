@@ -28,8 +28,9 @@
     <string name="short_company_description">Tinkoff bank is a rapidly growing product development firm located in the heart of downtown Toronto. We partner with the world’s leading organizations to build software-powered products that are enjoyed by millions of users globally.</string>
     <string name="headquarter">Headquarter:</string>
     <string name="visit_our_website">Visit Our Website</string>
-
     <string name="oops_something_went_wrong">Oops! Something went wrong</string>
-
+    <string name="phone_number">Номер телефона</string>
+    <string name="password">Пароль</string>
+    <string name="login">Войти</string>
 
 </resources>

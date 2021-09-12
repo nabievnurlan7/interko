@@ -8,6 +8,7 @@ import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 import javax.crypto.spec.GCMParameterSpec
+import javax.crypto.spec.IvParameterSpec
 
 @RequiresApi(Build.VERSION_CODES.M)
 class CryptoUtilsReified : CryptoUtils() {
@@ -28,13 +29,14 @@ class CryptoUtilsReified : CryptoUtils() {
         )
     }.generateKey()
 
-    override fun encrypt(keyAlias: String, text: String): ByteArray {
-        cipher.init(Cipher.ENCRYPT_MODE, getKey(keyAlias), GCMParameterSpec(96, bytes))
-        return cipher.doFinal(text.toByteArray(encoding))
+    override fun encrypt(text: String): String {
+        cipher.init(Cipher.ENCRYPT_MODE, getKey(KEY_ALIAS), cipher.parameters)
+        return cipher.doFinal(text.toByteArray(encoding)).joinToString(":")
     }
 
-    override fun decrypt(keyAlias: String, encryptedData: ByteArray): String {
-        cipher.init(Cipher.DECRYPT_MODE, getKey(keyAlias), GCMParameterSpec(96, bytes))
-        return cipher.doFinal(encryptedData).toString(encoding)
+    override fun decrypt(encryptedData: String): String {
+        cipher.init(Cipher.DECRYPT_MODE, getKey(KEY_ALIAS), cipher.parameters)
+        val byteArray = encryptedData.split(":").map { values -> values.toByte() }.toByteArray()
+        return cipher.doFinal(byteArray).toString(encoding)
     }
 }

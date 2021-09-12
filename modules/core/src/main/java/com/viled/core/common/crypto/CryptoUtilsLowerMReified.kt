@@ -16,18 +16,19 @@ import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.SecretKeySpec
 import javax.security.auth.x500.X500Principal
 
-class CryptoUtilsDownMReified(private val context: Context) : CryptoUtils() {
+class CryptoUtilsLowerMReified(private val context: Context) : CryptoUtils() {
 
     val sharedPrefLayer: SharedPrefLayer by lazy { SharedPrefLayer(context) }
 
-    override fun encrypt(keyAlias: String, text: String): ByteArray {
-        cipher.init(Cipher.ENCRYPT_MODE, generateKey(keyAlias), GCMParameterSpec(128, bytes))
-        return cipher.doFinal(text.toByteArray(encoding))
+    override fun encrypt(text: String): String {
+        cipher.init(Cipher.ENCRYPT_MODE, generateKey(KEY_ALIAS), GCMParameterSpec(128, bytes))
+        return cipher.doFinal(text.toByteArray(encoding)).joinToString(":")
     }
 
-    override fun decrypt(keyAlias: String, encryptedData: ByteArray): String {
-        cipher.init(Cipher.DECRYPT_MODE, getKey(keyAlias), GCMParameterSpec(128, bytes))
-        return cipher.doFinal(encryptedData).toString(encoding)
+    override fun decrypt(encryptedData: String): String {
+        cipher.init(Cipher.DECRYPT_MODE, getKey(KEY_ALIAS), GCMParameterSpec(128, bytes))
+        val byteArray = encryptedData.split(":").map { values -> values.toByte() }.toByteArray()
+        return cipher.doFinal(byteArray).toString(encoding)
     }
 
     override fun getKey(alias: String): SecretKey =
