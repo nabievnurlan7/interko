@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="use_biometry">Использовать биометрию?</string>
+    <string name="bio_title">Аутентификация Sobeser</string>
+    <string name="bio_subtitle">Sobeser использует биометрическую аутентификацию Android</string>
+    <string name="bio_cancel">Вход по логину и паролю</string>
 </resources>

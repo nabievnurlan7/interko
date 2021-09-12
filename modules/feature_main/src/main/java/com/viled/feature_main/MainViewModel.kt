@@ -1,6 +1,5 @@
 package com.viled.feature_main
 
-import android.util.Log
 import com.viled.core.common.SharedPrefLayer
 import com.viled.core.common.base.BaseViewModel
 import com.viled.core.common.crypto.CryptoUtils
@@ -15,10 +14,11 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repository: MainRepository) : BaseViewModel() {
-
-    private lateinit var cryptoUtils: CryptoUtils
-    private lateinit var sharedPrefLayer: SharedPrefLayer
+class MainViewModel @Inject constructor(
+    private val repository: MainRepository,
+    private val cryptoUtils: CryptoUtils,
+    private val sharedPrefLayer: SharedPrefLayer
+) : BaseViewModel() {
 
     sealed class UiState {
         object Idle : UiState()
@@ -30,15 +30,9 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     private val _uiState = MutableStateFlow<UiState>(UiState.Idle)
     val uiState = _uiState.asStateFlow()
 
-    fun setCryptoUtils(cryptoUtils: CryptoUtils) {
-        this.cryptoUtils = cryptoUtils
-    }
-
-    fun setShared(sharedPrefLayer: SharedPrefLayer) {
-        this.sharedPrefLayer = sharedPrefLayer
-
+    init {
         if (sharedPrefLayer.token.isNotEmpty() && sharedPrefLayer.isBiometry) {
-            _uiState.value = UiState.Data("show_bio")
+            _uiState.value = UiState.Data(OPEN_BIOMETRY)
         }
     }
 
@@ -61,7 +55,6 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
                 }
             },
             exceptionBlock = {
-                Log.e("ERROR=", it.toString())
                 Timber.e("$it")
             }
         )
@@ -70,10 +63,15 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     private fun encrypt(token: String) {
         val encryptedValue = cryptoUtils.encrypt(token)
         sharedPrefLayer.token = encryptedValue
-        _uiState.value = UiState.Data("go")
+        _uiState.value = UiState.Data(OPEN_NEXT_FLOW)
     }
 
     fun setSuccess() {
-        _uiState.value = UiState.Data("go")
+        _uiState.value = UiState.Data(OPEN_NEXT_FLOW)
+    }
+
+    companion object {
+        const val OPEN_NEXT_FLOW = "go"
+        const val OPEN_BIOMETRY = "show_bio"
     }
 }
