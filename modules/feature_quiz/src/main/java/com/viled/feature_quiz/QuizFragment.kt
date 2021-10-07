@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.NavArgsLazy
+import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.viled.core.common.base.BaseFragment
+import com.viled.core.dto.Question
 import com.viled.feature_quiz.QuizViewModel.UiState
 import com.viled.feature_quiz.databinding.FragmentQuizBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +23,7 @@ class QuizFragment : BaseFragment(R.layout.fragment_quiz) {
 
     private val viewModel: QuizViewModel by viewModels()
     private val viewBinding: FragmentQuizBinding by viewBinding()
-    private lateinit var questionAdapter: QuestionAdapter
+    private val args by navArgs<QuizFragmentArgs>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,7 +33,7 @@ class QuizFragment : BaseFragment(R.layout.fragment_quiz) {
                 when (it) {
                     is UiState.Loading -> showProgress()
                     is UiState.Data -> {
-                        questionAdapter.setItems(it.questions)
+                        setQuestion(it.question, it.number)
                         closeProgress()
                     }
                     is UiState.Error -> {
@@ -43,18 +44,13 @@ class QuizFragment : BaseFragment(R.layout.fragment_quiz) {
                 }
             }
         }
-
-        setRecycler()
     }
 
-    private fun setRecycler() {
-        questionAdapter = QuestionAdapter { _, _, item ->
-        }
-
-        val linearLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        viewBinding.questionRecyclerView.apply {
-            layoutManager = linearLayoutManager
-            adapter = questionAdapter
-        }
+    private fun setQuestion(question: Question, numberTitle: String) {
+        viewBinding.questionTextView.text = question.question
+        viewBinding.questionNumberTextView.text = numberTitle
+//        if (mode.isRealInterview) {
+//            speakOut(question.question)
+//        }
     }
 }

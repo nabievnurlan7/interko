@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
 
 android {
     compileSdkVersion 30
@@ -80,6 +82,8 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines"
 
     implementation "com.kirich1409.viewbindingpropertydelegate:viewbindingpropertydelegate:$viewBindingDelegateVersion"
+    implementation 'com.github.MasayukiSuda:CameraRecorder-android:v0.1.5'
+
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

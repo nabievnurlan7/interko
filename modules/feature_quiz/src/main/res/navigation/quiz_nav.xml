@@ -7,7 +7,12 @@
     <fragment
         android:id="@+id/quizFragment"
         android:name="com.viled.feature_quiz.QuizFragment"
-        android:label="QuizFragment" />
+        android:label="QuizFragment" >
+
+        <argument
+            android:name="mode"
+            app:argType="com.viled.core.dto.Mode" />
+    </fragment>
 
     <fragment
         android:id="@+id/someFragment"
