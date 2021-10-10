@@ -1,0 +1,25 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+jar {
+    manifest{
+        attributes 'Lint-Registry-V2': 'kz.viled.rules.IssueRegistry'
+    }
+}
+
+dependencies {
+    ext {
+        lintVersion = "27.0.1"
+    }
+
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin"
+    compileOnly "com.android.tools.lint:lint-api:$lintVersion"
+    compileOnly "com.android.tools.lint:lint-checks:$lintVersion"
+}

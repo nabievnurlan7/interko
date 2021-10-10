@@ -1,6 +1,7 @@
 package com.viled.feature_job
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +28,7 @@ class JobsFragment : BaseFragment(R.layout.fragment_jobs) {
             filterButton.setOnClickListener {}
             // toolbar.titleTextView.text = getString(R.string.jobs)
         }
+        Log.e("ERROR=", "")
     }
 
     private fun initJobsRecycler() {

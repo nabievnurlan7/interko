@@ -36,6 +36,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    lintOptions {
+        ignoreTestSources true
+        abortOnError false
+        xmlReport false
+        checkDependencies true
+    }
 }
 
 dependencies {
@@ -47,6 +54,7 @@ dependencies {
     implementation project(':modules:feature_quiz')
     implementation project(':modules:network')
 
+    lintChecks project(path: ':modules:rules')
 
     //Hilt
     implementation 'com.google.dagger:hilt-android:2.35.1'
