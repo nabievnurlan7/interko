@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -55,7 +56,7 @@ class JobsFragment : BaseFragment(R.layout.fragment_jobs) {
 
         with(viewBinding) {
             filterButton.setOnClickListener {}
-            // toolbar.titleTextView.text = getString(R.string.jobs)
+            commonToolbar.setTitle(R.string.jobs)
         }
     }
 

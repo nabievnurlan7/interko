@@ -1,20 +1,19 @@
 package kz.viled.feature_job_detail
 
 import android.os.Bundle
-import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
-import com.viled.core.common.SHORT_INTERVIEW
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.viled.core.common.base.BaseFragment
 import com.viled.core.dto.Job
 import com.viled.core.dto.Mode
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_job_detail.*
+import kz.viled.feature_job_detail.databinding.FragmentJobDetailBinding
 
 @AndroidEntryPoint
 class JobDetailFragment : BaseFragment(R.layout.fragment_job_detail) {
 
     private lateinit var job: Job
+    private val viewBinding: FragmentJobDetailBinding by viewBinding()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,34 +22,45 @@ class JobDetailFragment : BaseFragment(R.layout.fragment_job_detail) {
 
     override fun setUI() {
         super.setUI()
-
         initMoveBackDispatcher()
-//        backImageView.isVisible = true
-//        backImageView.setOnClickListener { findNavController().popBackStack() }
-
         setData(job)
     }
 
     private fun setData(jobItem: Job) {
-//        titleTextView.text = jobItem.positionName
-        jobDescriptionTextView.text = jobItem.positionDescription
-        salaryTextView.text = jobItem.salary
-        locationTextView.text = jobItem.location
-        companyNameTextView.text = jobItem.company.name
-        establishedTextView.text = jobItem.company.established
-        missionTextView.text = jobItem.company.description
-        headquarterTextView.text = jobItem.company.headquarterLocation
-        employeesTextView.text = jobItem.company.employees
+        with(viewBinding) {
+            commonToolbar.setTitle(jobItem.positionName)
+            commonToolbar.setBackClickListener { findNavController().popBackStack() }
 
-        //initCollegesRecycler()
+            jobDescriptionTextView.text = jobItem.positionDescription
+            salaryTextView.text = jobItem.salary
+            locationTextView.text = jobItem.location
+            companyNameTextView.text = jobItem.company.name
+            establishedTextView.text = jobItem.company.established
+            missionTextView.text = jobItem.company.description
+            headquarterTextView.text = jobItem.company.headquarterLocation
+            employeesTextView.text = jobItem.company.employees
 
-        val sliderAdapter = SliderAdapter(requireContext())
-        imageSlider.sliderAdapter = sliderAdapter
-        jobItem.company.slides.forEach { if (it.isNotBlank()) sliderAdapter.addItem(SliderItem(it)) }
+            val sliderAdapter = SliderAdapter(requireContext())
+            imageSlider.sliderAdapter = sliderAdapter
+            jobItem.company.slides.forEach {
+                if (it.isNotBlank()) sliderAdapter.addItem(
+                    SliderItem(
+                        it
+                    )
+                )
+            }
 
-        startInterviewButton.setOnClickListener {
-            startInterview(Mode(isRealInterview = true, quantity = SHORT_INTERVIEW, subjectId = 0))
+            startInterviewButton.setOnClickListener {
+                startInterview(
+                    Mode(
+                        isRealInterview = true,
+                        quantity = com.viled.core.common.SHORT_INTERVIEW,
+                        subjectId = 0
+                    )
+                )
+            }
         }
+
     }
 
     private fun initCollegesRecycler() {

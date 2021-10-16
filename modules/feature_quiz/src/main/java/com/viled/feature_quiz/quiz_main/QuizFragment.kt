@@ -1,4 +1,4 @@
-package com.viled.feature_quiz
+package com.viled.feature_quiz.quiz_main
 
 import android.os.Bundle
 import android.view.View
@@ -9,7 +9,8 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.viled.core.common.base.BaseFragment
 import com.viled.core.dto.Question
-import com.viled.feature_quiz.QuizViewModel.UiState
+import com.viled.feature_quiz.R
+import com.viled.feature_quiz.quiz_main.QuizViewModel.UiState
 import com.viled.feature_quiz.databinding.FragmentQuizBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope

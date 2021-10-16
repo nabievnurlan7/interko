@@ -1,4 +1,4 @@
-package com.viled.feature_quiz
+package com.viled.feature_quiz.quiz_main
 
 import androidx.lifecycle.SavedStateHandle
 import com.viled.core.common.base.BaseViewModel
@@ -11,7 +11,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel

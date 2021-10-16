@@ -1,8 +1,9 @@
-package com.viled.feature_quiz
+package com.viled.feature_quiz.quiz_main
 
 import android.view.ViewGroup
 import com.viled.core.common.base.BaseViewHolder
 import com.viled.core.dto.Question
+import com.viled.feature_quiz.R
 import com.viled.feature_quiz.databinding.ItemQuestionBinding
 
 class QuestionViewHolder(
