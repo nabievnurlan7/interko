@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/job_detail_nav"
+    app:startDestination="@id/jobDetailFragment">
+
+    <fragment
+        android:id="@+id/jobDetailFragment"
+        android:name="kz.viled.feature_job_detail.JobDetailFragment"
+        android:label="JobDetailFragment" >
+
+        <argument
+            android:name="job_detail"
+            app:argType="com.viled.core.dto.Job" />
+    </fragment>
+</navigation>

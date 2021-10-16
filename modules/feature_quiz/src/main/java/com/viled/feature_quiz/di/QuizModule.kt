@@ -13,32 +13,6 @@ import javax.inject.Singleton
 @Module
 object QuizModule {
 
-//    @Binds
-//    @Singleton
-//    abstract fun bindsRepository(repository: QuizRepository): QuizRepository
-
-
-//    @Singleton
     @Provides
     fun providesQuizRepository(networkApi: NetworkApi): QuizRepository = QuizRepository(networkApi)
-
-
-//    @Singleton
-//    @Provides
-//    fun providesQuizViewModel(quizRepository: QuizRepository): QuizViewModel =
-//        QuizViewModel(quizRepository)
-
-
-//    companion object {
-//
-//        @Provides
-//        @Singleton
-//        @JvmStatic
-//        fun provideQuizViewModel(
-//            map: @JvmSuppressWildcards MutableMap<Class<out ViewModel>, ViewModel>,
-//            quizRepository: QuizRepository
-//        ): ViewModel = QuizViewModel(quizRepository).also {
-//            map[QuizViewModel::class.java] = it
-//        }
-//    }
 }

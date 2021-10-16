@@ -3,6 +3,7 @@ package com.viled.feature_job
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,8 @@ import com.viled.core.common.base.BaseFragment
 import com.viled.core.dto.Job
 import com.viled.feature_job.JobsViewModel.UiState
 import com.viled.feature_job.databinding.FragmentJobsBinding
+import com.viled.navigation.NavigationFlow
+import com.viled.navigation.ToFlowNavigatable
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -85,9 +88,10 @@ class JobsFragment : BaseFragment(R.layout.fragment_jobs) {
     }
 
     private fun openDetails(job: Job) {
-//        findNavController().navigate(
-//            R.id.action_jobsFragment_to_jobDetailFragment,
-//            bundleOf(JOB_DETAIL to job)
-//        )
+        (requireActivity() as ToFlowNavigatable).navigateToFlow(
+            NavigationFlow.JobDetailFlow(
+                bundleOf("job_detail" to job)
+            )
+        )
     }
 }

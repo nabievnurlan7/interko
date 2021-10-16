@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.viled.core.common.base.BaseFragment
@@ -41,6 +42,16 @@ class QuizFragment : BaseFragment(R.layout.fragment_quiz) {
                             .show()
                     }
                     UiState.Finished -> {
+//                        if (mode.isRealInterview) {
+//                            cameraLayer?.stopRecording()
+//                            Toast.makeText(
+//                                requireContext(),
+//                                "Interview is finished. Thank you!",
+//                                Toast.LENGTH_LONG
+//                            ).show()
+//                        }
+
+                        findNavController().popBackStack()
                     }
                 }
             }
