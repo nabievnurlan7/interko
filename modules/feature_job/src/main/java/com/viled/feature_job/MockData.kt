@@ -1,5 +1,8 @@
 package com.viled.feature_job
 
+import com.viled.core.dto.Company
+import com.viled.core.dto.Job
+
 object MockData {
 
     private const val description =

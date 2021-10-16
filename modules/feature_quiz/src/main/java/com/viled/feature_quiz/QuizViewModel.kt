@@ -52,10 +52,11 @@ class QuizViewModel @Inject constructor(
                         questions = result.fetchedData!!
                         sendQuestion()
                     }
+
                     ResponseStatus.ERROR -> _uiState.emit(UiState.Error(result.errorType!!))
                 }
             },
-            exceptionBlock = { Timber.e("$it") }
+            exceptionBlock = {  _uiState.value = UiState.Error(it) }
         )
     }
 

@@ -1,5 +1,6 @@
 package com.viled.network
 
+import com.viled.core.dto.Job
 import com.viled.core.dto.Question
 import com.viled.core.dto.Subject
 import retrofit2.Response
@@ -15,5 +16,8 @@ interface NetworkApi {
     ): Response<List<Question>>
 
     @GET("tags")
-    suspend fun getTags(): List<Subject>
+    suspend fun getTags(): Response<List<Subject>>
+
+    @GET("jobs")
+    suspend fun getJobs(): Response<List<Job>>
 }

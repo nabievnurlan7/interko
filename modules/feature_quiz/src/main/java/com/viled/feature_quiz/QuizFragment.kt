@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavArgsLazy
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.viled.core.common.base.BaseFragment
@@ -41,14 +40,27 @@ class QuizFragment : BaseFragment(R.layout.fragment_quiz) {
                         Toast.makeText(requireContext(), it.errorType.message, Toast.LENGTH_LONG)
                             .show()
                     }
+                    UiState.Finished -> {
+                    }
                 }
             }
         }
     }
 
+    override fun setUI() {
+        super.setUI()
+
+        with(viewBinding) {
+            nextButton.setOnClickListener { viewModel.giveNextQuestion() }
+        }
+    }
+
     private fun setQuestion(question: Question, numberTitle: String) {
-        viewBinding.questionTextView.text = question.question
-        viewBinding.questionNumberTextView.text = numberTitle
+        with(viewBinding) {
+            questionTextView.text = question.question
+            questionNumberTextView.text = numberTitle
+        }
+
 //        if (mode.isRealInterview) {
 //            speakOut(question.question)
 //        }

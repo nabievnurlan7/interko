@@ -46,9 +46,7 @@ abstract class BaseViewModel : ViewModel() {
             }
         )
         {
-            withContext(context) {
-                doAsyncBlock.invoke(this)
-            }
+            withContext(context) { doAsyncBlock.invoke(this) }
         }
     }
 }

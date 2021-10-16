@@ -2,6 +2,7 @@ package com.viled.feature_job
 
 import android.view.ViewGroup
 import com.viled.core.common.base.BaseViewHolder
+import com.viled.core.dto.Job
 import com.viled.feature_job.databinding.ItemJobBinding
 
 

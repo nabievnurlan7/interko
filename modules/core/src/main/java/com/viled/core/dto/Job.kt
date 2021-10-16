@@ -1,4 +1,4 @@
-package com.viled.feature_job
+package com.viled.core.dto
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

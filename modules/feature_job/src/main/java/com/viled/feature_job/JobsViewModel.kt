@@ -1,16 +1,14 @@
 package com.viled.feature_job
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.viled.core.common.base.BaseViewModel
+import com.viled.core.common.error.ErrorType
+import com.viled.core.dto.Job
+import com.viled.network.ResponseStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import timber.log.Timber
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,63 +16,38 @@ class JobsViewModel @Inject constructor(
     private val repository: JobsRepository
 ) : BaseViewModel() {
 
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
-    private val jobs = MutableLiveData<List<Job>>()
-    private val cachedJobs: MutableList<Job> = mutableListOf()
+    private var cachedJobs: List<Job> = mutableListOf()
+
+    sealed class UiState {
+        object Loading : UiState()
+        class Data(val jobs: List<Job>) : UiState()
+        class Error(val errorType: ErrorType) : UiState()
+    }
+
+    private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
+    val uiState = _uiState.asStateFlow()
 
     init {
-        //  loadJobs()
-        //  loadDelayedJobs()
-        loadNetworkJobs()
-
-        GlobalScope.async { }
-        GlobalScope.launch { }
+        loadJobs()
     }
 
-    fun getJobs(): LiveData<List<Job>> = jobs
-
-    private fun loadRandomJob() {
-        compositeDisposable.add(
-            repository.loadSingleJob()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { job ->
-                    Timber.d("JOB = ${job.id}")
-                    cachedJobs.add(job)
-                    jobs.postValue(cachedJobs)
+    private fun loadJobs() {
+        doWorkInMainThread(
+            doAsyncBlock = {
+                val resultDeferred = async(Dispatchers.IO) {
+                    repository.loadJobs()
                 }
-        )
-    }
 
-    private fun loadDelayedJobs() {
-        compositeDisposable.add(
-            repository.loadDelayedJobs()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { job ->
-                    Timber.d("JOB = ${job.id}")
-                    cachedJobs.add(job)
-                    jobs.postValue(cachedJobs)
+                val result = resultDeferred.await()
+                when (result.status) {
+                    ResponseStatus.SUCCESS -> {
+                        cachedJobs = result.fetchedData!!
+                        _uiState.emit(UiState.Data(cachedJobs))
+                    }
+                    ResponseStatus.ERROR -> _uiState.emit(UiState.Error(result.errorType!!))
                 }
+            },
+            exceptionBlock = { _uiState.value = UiState.Error(it) }
         )
-    }
-
-    private fun loadNetworkJobs() {
-        compositeDisposable.add(
-            repository.loadNetworkJobs()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .onErrorResumeNext(repository.loadSingleJob().toObservable())
-                .subscribe { job ->
-                    Timber.d("JOB = ${job.id}")
-                    cachedJobs.add(job)
-                    jobs.postValue(cachedJobs)
-                }
-        )
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.clear()
     }
 }
