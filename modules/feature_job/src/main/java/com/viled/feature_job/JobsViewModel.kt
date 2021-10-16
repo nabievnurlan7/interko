@@ -7,6 +7,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -23,6 +26,9 @@ class JobsViewModel @Inject constructor(
         //  loadJobs()
         //  loadDelayedJobs()
         loadNetworkJobs()
+
+        GlobalScope.async { }
+        GlobalScope.launch { }
     }
 
     fun getJobs(): LiveData<List<Job>> = jobs

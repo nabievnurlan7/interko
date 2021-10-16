@@ -10,6 +10,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.viled.core.common.base.BaseFragment
 import com.viled.feature_job.databinding.FragmentJobsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class JobsFragment : BaseFragment(R.layout.fragment_jobs) {
@@ -29,6 +32,9 @@ class JobsFragment : BaseFragment(R.layout.fragment_jobs) {
             // toolbar.titleTextView.text = getString(R.string.jobs)
         }
         Log.e("ERROR=", "")
+
+        GlobalScope.async { }
+        GlobalScope.launch { }
     }
 
     private fun initJobsRecycler() {
