@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="core_nav" type="id" />
+    <item name="subjects_nav" type="id" />
     <item name="quiz_nav" type="id" />
     <item name="job_nav" type="id" />
     <item name="job_detail_nav" type="id" />

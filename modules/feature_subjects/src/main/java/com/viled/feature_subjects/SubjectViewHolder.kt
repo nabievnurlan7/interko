@@ -1,10 +1,9 @@
-package com.viled.feature_quiz.quiz_subjects
+package com.viled.feature_subjects
 
 import android.view.ViewGroup
 import com.viled.core.common.base.BaseViewHolder
 import com.viled.core.dto.Subject
-import com.viled.feature_quiz.R
-import com.viled.feature_quiz.databinding.ItemSubjectBinding
+import com.viled.feature_subjects.databinding.ItemSubjectBinding
 
 
 class SubjectViewHolder(

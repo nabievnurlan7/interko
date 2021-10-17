@@ -1,4 +1,4 @@
-package com.viled.feature_quiz.quiz_main
+package com.viled.feature_quiz
 
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
@@ -13,9 +13,8 @@ import com.viled.core.common.INTERVIEW_MODE
 import com.viled.core.common.base.BaseFragment
 import com.viled.core.dto.Mode
 import com.viled.core.dto.Question
-import com.viled.feature_quiz.R
+import com.viled.feature_quiz.QuizViewModel.UiState
 import com.viled.feature_quiz.databinding.FragmentQuizBinding
-import com.viled.feature_quiz.quiz_main.QuizViewModel.UiState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,8 +37,7 @@ class QuizFragment : BaseFragment(R.layout.fragment_quiz), TextToSpeech.OnInitLi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // arguments?.getParcelable<Mode>(INTERVIEW_MODE)?.let { mode = it }
-        mode = Mode(true )
+        arguments?.getParcelable<Mode>(INTERVIEW_MODE)?.let { mode = it }
     }
 
     override fun onResume() {
@@ -88,7 +86,7 @@ class QuizFragment : BaseFragment(R.layout.fragment_quiz), TextToSpeech.OnInitLi
                             ).show()
                         }
 
-                        findNavController().popBackStack()
+                        moveToSubjects()
                     }
                 }
             }
@@ -132,6 +130,10 @@ class QuizFragment : BaseFragment(R.layout.fragment_quiz), TextToSpeech.OnInitLi
         } else {
             Timber.e("TTS Initialization Failed!")
         }
+    }
+
+    private fun moveToSubjects() {
+        findNavController().navigate(R.id.action_global_subjects)
     }
 
     override fun onDestroy() {

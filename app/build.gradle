@@ -52,6 +52,7 @@ dependencies {
     implementation project(':modules:feature_job_detail')
     implementation project(':modules:feature_main')
     implementation project(':modules:feature_profile')
+    implementation project(':modules:feature_subjects')
     implementation project(':modules:feature_quiz')
     implementation project(':modules:network')
 

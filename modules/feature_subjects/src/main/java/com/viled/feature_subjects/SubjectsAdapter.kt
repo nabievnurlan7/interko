@@ -1,4 +1,4 @@
-package com.viled.feature_quiz.quiz_subjects
+package com.viled.feature_subjects
 
 import android.view.ViewGroup
 import com.viled.core.common.base.BaseAdapter

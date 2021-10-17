@@ -2,21 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@id/quiz_nav"
-    app:startDestination="@id/subjectsFragment">
-
-    <fragment
-        android:id="@+id/subjectsFragment"
-        android:name="com.viled.feature_quiz.quiz_subjects.SubjectsFragment"
-        android:label="SubjectsFragment">
-
-        <action
-            android:id="@+id/action_subjectsFragment_to_quizFragment"
-            app:destination="@id/quizFragment" />
-    </fragment>
+    app:startDestination="@id/quizFragment">
 
     <fragment
         android:id="@+id/quizFragment"
-        android:name="com.viled.feature_quiz.quiz_main.QuizFragment"
+        android:name="com.viled.feature_quiz.QuizFragment"
         android:label="QuizFragment" >
 
         <argument

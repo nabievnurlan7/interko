@@ -1,8 +1,10 @@
 package kz.viled.feature_job_detail
 
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.viled.core.common.INTERVIEW_MODE
 import com.viled.core.common.base.BaseFragment
 import com.viled.core.dto.Job
 import com.viled.core.dto.Mode
@@ -63,30 +65,11 @@ class JobDetailFragment : BaseFragment(R.layout.fragment_job_detail) {
 
     }
 
-    private fun initCollegesRecycler() {
-//        val actionsAdapter = ActionsAdapter(
-//            listener = { item ->
-//            }
-//        )
-//
-//        val linearLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-//        linearLayoutManager.initialPrefetchItemCount = 20
-//
-//        actionsRecyclerView.apply {
-//            layoutManager = linearLayoutManager
-//            adapter = actionsAdapter
-//        }
-//
-//        planViewModel.getActions().observe(this, Observer { actionList ->
-//            actionsAdapter.setItems(actionList)
-//        })
-    }
-
     private fun startInterview(mode: Mode) {
-//        findNavController().navigate(
-//            R.id.action_global_job_to_interview,
-//            bundleOf(InterviewFragment.INTERVIEW_MODE to mode)
-//        )
+        findNavController().navigate(
+            R.id.action_global_quiz,
+            bundleOf(INTERVIEW_MODE to mode)
+        )
     }
 
     companion object {

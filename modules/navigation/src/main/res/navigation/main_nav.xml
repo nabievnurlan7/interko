@@ -5,19 +5,24 @@
     app:startDestination="@id/core_nav">
 
     <include app:graph="@navigation/core_nav" />
+    <include app:graph="@navigation/subjects_nav" />
     <include app:graph="@navigation/quiz_nav" />
     <include app:graph="@navigation/job_nav" />
     <include app:graph="@navigation/profile_nav" />
     <include app:graph="@navigation/job_detail_nav" />
 
-<!--    <action-->
-<!--        android:id="@+id/action_global_main"-->
-<!--        app:destination="@id/quiz_nav"-->
-<!--        app:popUpTo="@id/main_nav" />-->
+    <!--    <action-->
+    <!--        android:id="@+id/action_global_main"-->
+    <!--        app:destination="@id/quiz_nav"-->
+    <!--        app:popUpTo="@id/main_nav" />-->
 
-   <action
+    <action
         android:id="@+id/action_global_quiz"
         app:destination="@id/quiz_nav"
+        app:popUpTo="@id/main_nav" />
+    <action
+        android:id="@+id/action_global_subjects"
+        app:destination="@id/subjects_nav"
         app:popUpTo="@id/main_nav" />
 
     <action

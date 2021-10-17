@@ -1,6 +1,6 @@
-package com.viled.feature_quiz.di
+package com.viled.feature_subjects.di
 
-import com.viled.feature_quiz.QuizRepository
+import com.viled.feature_subjects.SubjectsRepository
 import com.viled.network.NetworkApi
 import dagger.Module
 import dagger.Provides
@@ -9,8 +9,9 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 
 @InstallIn(ActivityRetainedComponent::class)
 @Module
-object QuizModule {
+object SubjectsModule {
 
     @Provides
-    fun providesQuizRepository(networkApi: NetworkApi): QuizRepository = QuizRepository(networkApi)
+    fun providesSubjectsRepository(networkApi: NetworkApi): SubjectsRepository =
+        SubjectsRepository(networkApi)
 }

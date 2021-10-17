@@ -1,9 +1,8 @@
-package com.viled.feature_quiz.quiz_subjects
+package com.viled.feature_subjects
 
 import com.viled.core.common.base.BaseViewModel
 import com.viled.core.common.error.ErrorType
 import com.viled.core.dto.Subject
-import com.viled.feature_quiz.quiz_main.QuizRepository
 import com.viled.network.ResponseStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SubjectsViewModel @Inject constructor(
-    private val repository: QuizRepository
+    private val repository: SubjectsRepository
 ) : BaseViewModel() {
 
     sealed class UiState {
@@ -33,7 +32,7 @@ class SubjectsViewModel @Inject constructor(
     private fun loadTags() {
         doWorkInMainThread(
             doAsyncBlock = {
-                val resultDeferred = async(Dispatchers.IO) { repository.getTags() }
+                val resultDeferred = async(Dispatchers.IO) { repository.getSubjects() }
 
                 val result = resultDeferred.await()
                 when (result.status) {

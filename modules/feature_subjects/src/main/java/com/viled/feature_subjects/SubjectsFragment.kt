@@ -1,7 +1,8 @@
-package com.viled.feature_quiz.quiz_subjects
+package com.viled.feature_subjects
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -11,9 +12,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.viled.core.common.INTERVIEW_MODE
 import com.viled.core.common.base.BaseFragment
 import com.viled.core.dto.Mode
-import com.viled.feature_quiz.R
-import com.viled.feature_quiz.databinding.FragmentSubjectsBinding
-import com.viled.feature_quiz.quiz_subjects.SubjectsViewModel.UiState
+import com.viled.feature_subjects.SubjectsViewModel.UiState
+import com.viled.feature_subjects.databinding.FragmentSubjectsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 class SubjectsFragment : BaseFragment(R.layout.fragment_subjects) {
 
     private val viewBinding: FragmentSubjectsBinding by viewBinding()
-    private lateinit var detailDialog: BottomDialog
+    private lateinit var detailDialog: ChooseQuizTypeDialog
     private val viewModel: SubjectsViewModel by viewModels()
     private lateinit var subjectsAdapter: SubjectsAdapter
 
@@ -41,6 +41,8 @@ class SubjectsFragment : BaseFragment(R.layout.fragment_subjects) {
                     }
                     is UiState.Error -> {
                         closeProgress()
+                        Toast.makeText(requireContext(), it.errorType.message, Toast.LENGTH_LONG)
+                            .show()
                     }
                 }
             }
@@ -50,22 +52,23 @@ class SubjectsFragment : BaseFragment(R.layout.fragment_subjects) {
     override fun setUI() {
         super.setUI()
 
-        initTagsRecycler()
+        initSubjectsRecycler()
 
         with(viewBinding) {
             commonToolbar.setTitle(R.string.subjects)
 
             startButton.setOnClickListener {
-                detailDialog = BottomDialog(listener = { startInterview(Mode(quantity = it)) })
+                detailDialog =
+                    ChooseQuizTypeDialog(listener = { startInterview(Mode(quantity = it)) })
                 detailDialog.show(childFragmentManager, "")
             }
         }
     }
 
-    private fun initTagsRecycler() {
+    private fun initSubjectsRecycler() {
         subjectsAdapter = SubjectsAdapter(
             listener = { _, _, item ->
-                detailDialog = BottomDialog {
+                detailDialog = ChooseQuizTypeDialog {
                     startInterview(
                         Mode(quantity = it, subjectId = item.id)
                     )
@@ -98,7 +101,7 @@ class SubjectsFragment : BaseFragment(R.layout.fragment_subjects) {
 
     private fun startInterview(mode: Mode) {
         findNavController().navigate(
-            R.id.action_subjectsFragment_to_quizFragment,
+            R.id.action_global_quiz,
             bundleOf(INTERVIEW_MODE to mode)
         )
     }

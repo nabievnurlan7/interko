@@ -1,4 +1,4 @@
-package com.viled.feature_quiz.quiz_main
+package com.viled.feature_quiz
 
 import android.app.Activity
 import android.content.ContentValues

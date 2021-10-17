@@ -1,4 +1,4 @@
-package com.viled.feature_quiz.quiz_main
+package com.viled.feature_quiz
 
 import androidx.lifecycle.SavedStateHandle
 import com.viled.core.common.base.BaseViewModel

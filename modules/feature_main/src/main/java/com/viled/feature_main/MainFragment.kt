@@ -67,14 +67,13 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private fun processViewState(state: UiState) {
         when (state) {
+            is UiState.Idle -> { }
             is UiState.Loading -> showProgress()
-            is UiState.Idle -> {
-            }
             is UiState.Data -> {
                 closeProgress()
                 if (state.successStatus == OPEN_NEXT_FLOW) {
                     (requireActivity() as ToFlowNavigatable).navigateToFlow(
-                        NavigationFlow.QuizFlow
+                        NavigationFlow.SubjectsFlow
                     )
                 } else if (state.successStatus == OPEN_BIOMETRY) {
                     viewBinding.biometryCheckBox.isChecked = true

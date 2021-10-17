@@ -9,7 +9,12 @@ class Navigator {
     fun navigateToFlow(navigationFlow: NavigationFlow) =
         when (navigationFlow) {
 //            NavigationFlow.MainFlow -> navController.navigate(R.id.action_global_quiz)
-            is NavigationFlow.QuizFlow -> navController.navigate(R.id.action_global_quiz)
+
+            is NavigationFlow.SubjectsFlow -> navController.navigate(R.id.action_global_subjects)
+            is NavigationFlow.QuizFlow -> navController.navigate(
+                R.id.action_global_quiz,
+                navigationFlow.bundle
+            )
             is NavigationFlow.JobFlow -> navController.navigate(R.id.action_global_job)
             is NavigationFlow.JobDetailFlow -> navController.navigate(
                 R.id.action_global_job_detail,

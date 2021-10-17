@@ -1,4 +1,4 @@
-package com.viled.feature_quiz.quiz_subjects
+package com.viled.feature_subjects
 
 import android.app.Dialog
 import android.os.Bundle
@@ -11,11 +11,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.viled.core.common.LONG_INTERVIEW
 import com.viled.core.common.MEDIUM_INTERVIEW
 import com.viled.core.common.SHORT_INTERVIEW
-import com.viled.feature_quiz.R
-import com.viled.feature_quiz.databinding.DialogBottomBinding
+import com.viled.feature_subjects.R
+import com.viled.feature_subjects.databinding.DialogBottomBinding
 
 
-class BottomDialog(val listener: (Int) -> Unit) : BottomSheetDialogFragment() {
+class ChooseQuizTypeDialog(val listener: (Int) -> Unit) : BottomSheetDialogFragment() {
 
     private val viewBinding: DialogBottomBinding by dialogViewBinding(R.id.bottomContainer)
 
