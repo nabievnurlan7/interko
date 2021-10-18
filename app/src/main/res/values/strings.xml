@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sobeser</string>
+    <string name="app_name">Kodai</string>
     <string name="button">Button</string>
     <string name="someText">Salam</string>
     <string name="oops_something_went_wrong">Oops! Something went wrong</string>
@@ -7,5 +7,4 @@
     <string name="nothing">Nothing</string>
     <string name="url">Url</string>
     <string name="file">File</string>
-    <string name="title_dynamicfeature">myFeature</string>
 </resources>

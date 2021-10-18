@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/start_nav"
+    app:startDestination="@id/main_nav">
+
+    <include app:graph="@navigation/main_nav" />
+    <include app:graph="@navigation/subjects_nav" />
+    <include app:graph="@navigation/quiz_nav" />
+    <include app:graph="@navigation/job_nav" />
+    <include app:graph="@navigation/profile_nav" />
+    <include app:graph="@navigation/job_detail_nav" />
+
+    <!--    <action-->
+    <!--        android:id="@+id/action_global_main"-->
+    <!--        app:destination="@id/quiz_nav"-->
+    <!--        app:popUpTo="@id/main_nav" />-->
+
+    <action
+        android:id="@+id/action_global_quiz"
+        app:destination="@id/quiz_nav"
+        app:popUpTo="@id/main_nav" />
+
+    <action
+        android:id="@+id/action_global_subjects"
+        app:destination="@id/subjects_nav"
+        app:popUpTo="@id/main_nav" />
+
+    <action
+        android:id="@+id/action_global_job"
+        app:destination="@id/job_nav"
+        app:popUpTo="@id/main_nav" />
+
+    <action
+        android:id="@+id/action_global_job_detail"
+        app:destination="@id/job_detail_nav"
+        app:popUpTo="@id/main_nav" />
+
+    <action
+        android:id="@+id/action_global_profile"
+        app:destination="@id/profile_nav"
+        app:popUpTo="@id/main_nav" />
+</navigation>

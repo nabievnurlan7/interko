@@ -9,6 +9,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.viled.core.common.DialogFactory
 import com.viled.core.common.ProgressDialog
+import com.viled.core.common.SharedPrefLayer
 import com.viled.core.common.error.ErrorType
 
 abstract class BaseFragment(private val layout: Int) : Fragment(layout) {
@@ -21,10 +22,12 @@ abstract class BaseFragment(private val layout: Int) : Fragment(layout) {
         errorDialog = DialogFactory.getErrorDialog(requireContext())
     }
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View =
-            inflater.inflate(layout, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View =
+        inflater.inflate(layout, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -64,7 +67,7 @@ abstract class BaseFragment(private val layout: Int) : Fragment(layout) {
     }
 
     open fun initMoveBackDispatcher() {
-     //   initBackDispatcher { findNavController().popBackStack() }
+        //   initBackDispatcher { findNavController().popBackStack() }
     }
 
     open fun initMoveToMainDispatcher() {
@@ -72,12 +75,12 @@ abstract class BaseFragment(private val layout: Int) : Fragment(layout) {
 
     private fun initBackDispatcher(block: () -> Unit) {
         requireActivity().onBackPressedDispatcher.addCallback(
-                viewLifecycleOwner,
-                object : OnBackPressedCallback(true) {
-                    override fun handleOnBackPressed() {
-                        block.invoke()
-                    }
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    block.invoke()
                 }
+            }
         )
     }
 }

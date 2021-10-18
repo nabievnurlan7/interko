@@ -12,7 +12,7 @@ import com.viled.core.common.base.BaseFragment
 import com.viled.feature_main.MainViewModel.Companion.OPEN_BIOMETRY
 import com.viled.feature_main.MainViewModel.Companion.OPEN_NEXT_FLOW
 import com.viled.feature_main.MainViewModel.UiState
-import com.viled.feature_main.databinding.FragmentMainBinding
+import com.viled.feature_main.databinding.FragmentLoginBinding
 import com.viled.navigation.NavigationFlow
 import com.viled.navigation.ToFlowNavigatable
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,10 +23,10 @@ import kotlinx.coroutines.launch
 import java.util.concurrent.Executor
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment(R.layout.fragment_main) {
+class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     private val viewModel: MainViewModel by viewModels()
-    private val viewBinding: FragmentMainBinding by viewBinding()
+    private val viewBinding: FragmentLoginBinding by viewBinding()
 
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
@@ -67,7 +67,8 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private fun processViewState(state: UiState) {
         when (state) {
-            is UiState.Idle -> { }
+            is UiState.Idle -> {
+            }
             is UiState.Loading -> showProgress()
             is UiState.Data -> {
                 closeProgress()

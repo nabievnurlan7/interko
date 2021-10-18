@@ -23,7 +23,8 @@ class MainActivity : AppCompatActivity(), ToFlowNavigatable {
     private val navigator: Navigator = Navigator()
     private val hideBottomBarList =
         listOf(
-            R.id.mainFragment,
+            R.id.loginFragment,
+            R.id.splashFragment,
         )
 
     override fun onCreate(savedInstanceState: Bundle?) {
