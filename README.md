@@ -1,8 +1,8 @@
 # Kodai
 My diploma project. Job interview &amp; quizes
-Presentation: https://docs.google.com/presentation/d/19h5cKX3PeeVZ64Xb9YH4llxa8mrl_F1LaRtBDKKr7w4/edit?usp=sharing
-Video: https://www.youtube.com/watch?v=LZVYHBZCYHs
-Backend written by me. Based on KTOR => https://github.com/nabievnurlan7/kodai-backend
+\nPresentation: https://docs.google.com/presentation/d/19h5cKX3PeeVZ64Xb9YH4llxa8mrl_F1LaRtBDKKr7w4/edit?usp=sharing
+\nVideo: https://www.youtube.com/watch?v=LZVYHBZCYHs
+\nBackend written by me. Based on KTOR => https://github.com/nabievnurlan7/kodai-backend
 
 Screens:
 - Choose topic
