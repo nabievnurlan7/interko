@@ -13,8 +13,28 @@
         android:id="@+id/splashFragment"
         android:name="com.viled.feature_main.SplashFragment"
         android:label="SplashFragment">
+
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+
+        <action
+            android:id="@+id/action_splashFragment_to_registrationDataFragment"
+            app:destination="@id/registrationDataFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/registrationDataFragment"
+        android:name="com.viled.feature_main.RegistrationDataFragment"
+        android:label="RegistrationDataFragment" >
+
+        <action
+            android:id="@+id/action_registrationDataFragment_to_registrationSpecialityFragment"
+            app:destination="@id/registrationSpecialityFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registrationSpecialityFragment"
+        android:name="com.viled.feature_main.RegistrationSpecialityFragment"
+        android:label="RegistrationSpecialityFragment" />
 </navigation>

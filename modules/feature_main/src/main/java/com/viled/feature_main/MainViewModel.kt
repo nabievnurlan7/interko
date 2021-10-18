@@ -70,6 +70,20 @@ class MainViewModel @Inject constructor(
         _uiState.value = UiState.Data(OPEN_NEXT_FLOW)
     }
 
+    fun isFirstEntry(): Boolean = sharedPrefLayer.isFirstEntry
+
+    fun setFirstEntry() {
+        sharedPrefLayer.isFirstEntry = false
+    }
+
+    fun getMockSpinnerData(): List<SpinnerItem> = listOf(
+        SpinnerItem(1, "Android"),
+        SpinnerItem(2, "Java Backend"),
+        SpinnerItem(3, "Spring framework"),
+        SpinnerItem(4, "Vue.js"),
+        SpinnerItem(5, "Flutter"),
+    )
+
     companion object {
         const val OPEN_NEXT_FLOW = "go"
         const val OPEN_BIOMETRY = "show_bio"

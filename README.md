@@ -1,5 +1,6 @@
-# interko
+# Kodai
 My diploma project. Job interview &amp; quizes
+Backend written by me. Based on KTOR => https://github.com/nabievnurlan7/kodai-backend
 
 Screens:
 - Choose topic
@@ -19,5 +20,4 @@ Tech Stack:
 - Room
 - DataStore(instead of sharedpref)
 - ViewBinding
-- MotionLayout
-- Jetpack Compose???
+- Biometry

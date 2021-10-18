@@ -10,6 +10,14 @@ class SharedPrefLayer(context: Context) {
         context.getSharedPreferences(SHARED_NAME, Context.MODE_PRIVATE)
     private val gson: Gson = Gson()
 
+    var isFirstEntry
+        get() = sharedPref.getBoolean(IS_FIRST_ENTRY, true) ?: true
+        set(value) {
+            val editor = sharedPref.edit()
+            editor.putBoolean(IS_FIRST_ENTRY, value)
+            editor.apply()
+        }
+
     var keyName
         get() = sharedPref.getString(KEY_NAME, "") ?: ""
         set(value) {
@@ -51,6 +59,7 @@ class SharedPrefLayer(context: Context) {
 
     companion object {
         private const val SHARED_NAME = "shared_pref_file"
+        private const val IS_FIRST_ENTRY = "is_first_entry"
         private const val KEY_NAME = "key_name"
         private const val TOKEN = "token"
         private const val BIOMETRY = "biometry"

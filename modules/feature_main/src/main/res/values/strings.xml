@@ -4,4 +4,6 @@
     <string name="bio_title">Аутентификация Kodai</string>
     <string name="bio_subtitle">Kodai использует биометрическую аутентификацию Android</string>
     <string name="bio_cancel">Вход по логину и паролю</string>
+    <string name="firstname">Имя</string>
+    <string name="lastname">Фамилия</string>
 </resources>

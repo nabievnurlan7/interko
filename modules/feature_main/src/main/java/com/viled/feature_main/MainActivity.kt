@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity(), ToFlowNavigatable {
         listOf(
             R.id.loginFragment,
             R.id.splashFragment,
+            R.id.registrationDataFragment,
+            R.id.registrationSpecialityFragment,
         )
 
     override fun onCreate(savedInstanceState: Bundle?) {
